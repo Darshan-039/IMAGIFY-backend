@@ -83,6 +83,7 @@ const razorpayInstance = new razorpay({
     key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
+
 const paymentRazorpay = async (req, res) => {
     try {
         const { planId } = req.body;
@@ -165,7 +166,7 @@ const verifyRazorpay = async (req, res) => {
             const creditBalance = userData.creditBalance + transcationData.credits;
             await UserModel.findByIdAndUpdate(userData._id, { creditBalance });
 
-            await transcationModel.findByIdAndUpdate(transcationData._id, { payment: true });
+            await transcationModel.findByIdAndUpdate(transcationData._id, { payments: true });
 
             res.json({ success: true, message: "Credits Added" });
         } else {
